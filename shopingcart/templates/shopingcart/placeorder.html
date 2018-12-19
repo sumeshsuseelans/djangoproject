@@ -1,0 +1,15 @@
+{%extends "shopingcart/base.html"%}
+{%block title%}Order Page{%endblock%}
+{%block body%}
+{% for or in order %}
+<table>
+	<tr>
+	<div>
+<td><div class="shadow-lg p-3 mb-5 bg-white rounded"><h2>Your Order is Placed Successfully Order : #{{or.orderNo}}</h2></div></td><tr>
+<tr><td><div class="shadow-lg p-3 mb-5 bg-white rounded"><h3>Thank You!!!</h3></div></td></tr>
+</div>
+<tr>
+</table>
+{%endfor%}
+
+{%endblock%}

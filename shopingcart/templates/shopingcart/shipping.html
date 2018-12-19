@@ -1,0 +1,226 @@
+{%extends "shopingcart/base.html"%}
+{%block title%}Checkout Page{%endblock%}
+{%block body%}
+
+
+<span class="label label-info">Please enter the below information for Shipping the Ordered Product</span>
+
+
+
+
+<form method="POST">
+  {% csrf_token %}
+
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="fullName" name="fullName" placeholder="Eg : John" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Eg : John@gmail.com" type="email" required>
+        </div>
+         <div class="col-sm-6 form-group">
+          <input class="form-control" id="address" name="address" placeholder="Eg : No : 2, Shivaji Nagar .." type="text" required>
+        </div>
+         <div class="col-sm-6 form-group">
+          <input class="form-control" id="city" name="city" placeholder="Eg : Madurai" type="text" required>
+        </div>
+         <div class="col-sm-6 form-group">
+          <input class="form-control" id="state" name="state" placeholder="Eg : TN" type="text" required>
+        </div>
+         <div class="col-sm-6 form-group">
+          <input class="form-control" id="zipCode" name="zipCode" placeholder="Eg : 67811" type="number" required>
+        </div>
+      </div>
+   
+      <div class="row">
+        <div class="col-md-12 form-group">
+         <button class="btn pull-right" type="submit">Click to ship the yummy sweets!!!</button>
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br> 
+  </form>
+
+
+
+
+<!--<div class="container">
+  {% if all_shipping %}
+  {% for com in all_shipping %}
+ 
+  <p>{{com.fullName}}</p>
+  <p>{{com.email}}</p>
+  <p>{{com.address}}</p>
+  <p>{{com.city}}</p>
+  <p>{{com.state}}</p>
+   <p>{{com.zipCode}}</p>
+
+  {% endfor %}
+  <a href="{% url 'shopingcart:checkout'%}" class="btn btn-warning">Proceed</a>
+{% endif %}
+
+</div>-->
+
+
+   {% if all_shipping %}
+  {% for com in all_shipping %}
+ <div class="jumbotron">
+  <h1 class="display-4">Shipping Address Confirmation!</h1>
+  <p class="lead">Please confirm the below address and proceed to the payment address by clicking below 'Proceed to payment button'</p>
+  <hr class="my-4">
+  <p>Full Name : {{com.fullName}}</p>
+  <p>Email ID : {{com.email}}</p>
+  <p>Address : {{com.address}}</p>
+  <p>City : {{com.city}}</p>
+  <p>State : {{com.state}}</p>
+   <p>Pin Code : {{com.zipCode}}</p>
+    {% endfor %}
+  <a href="{% url 'shopingcart:checkout'%}" class="btn btn-warning">Proceed for the payment</a>
+  </div>
+{% endif %}>
+
+
+
+
+
+
+
+
+
+<!-- <form method="POST">
+{% csrf_token %}
+<div class="row">
+  <div class="col-75">
+    <div class="container">
+        <div class="row">
+          <div class="col-50">
+            <h3>Shipping Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" class="form-control" id="fname" name="firstname" placeholder="John M. Doe">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="john@example.com">
+            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+            <input type="text" class="form-control" id="adr" name="address" placeholder="shipping address">
+            <label for="city"><i class="fa fa-institution"></i> City</label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="Eg: Madurai">
+
+            <div class="row">
+              <div class="col-50">
+                <label for="state">State</label>
+                <input type="text" class="form-control" id="state" name="state" placeholder="Eg: TN">
+              </div>
+              <div class="col-50">
+                <label for="zip">Zip</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Eg: 10001">
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</table>
+<table>
+
+
+  <a href="{% url 'shopingcart:checkout'%}" class="btn btn-warning">Proceed to Payment</a>
+
+
+
+</table>
+
+<style>
+.row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -16px;
+}
+
+.col-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+}
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container {
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+}
+
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+</style>
+
+
+</form> -->
+
+{%endblock%}

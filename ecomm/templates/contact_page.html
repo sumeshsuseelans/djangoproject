@@ -1,0 +1,114 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Welcome to Sumesh Suseelan's Page {% endblock %}
+{% block content %}
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style inputs */
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+
+
+<h2>John's Reciepe </h2>
+<p>Address : No : 25, John's Recipe, Melamasi Street , Madurai </p>
+<p>Mobile : 7550103110</p>
+<p>Email : johnreciepe@gmail.com</p>
+
+<div class="container">
+  <div style="text-align:center">
+    <h2>Contact Us</h2>
+    <p>Swing by for a cup of coffee, or leave us a message:</p>
+  </div>
+  <div class="row">
+    <div class="column">
+      <img src="/static/img/coffee.jpg" style="width:100%">
+    </div>
+    <div class="column">
+      <form method="POST">
+      	  {% csrf_token %}
+        <label for="fname">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Your full name..">
+        <label for="lname">Mobile Number</label>
+        <input type="text" id="mobileNo" name="mobileNo" placeholder="Your mobile number..">
+        <label for="city">City</label>
+        <select id="city" name="city">
+          <option value="Madurai">Madurai</option>
+          <option value="Theni">Theni</option>
+          <option value="Rameshwaram">Rameshwaram</option>
+        </select>
+        <label for="subject">Leave your valuable message!!!!</label>
+        <textarea id="message" name="message" placeholder="Write something.." style="height:170px"></textarea>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+ <p class="text-center"><em><b>Suggestions!!!</b></em></p>
+<div class="container">
+  {% if all_user %}
+  {% for comment in all_user %}
+  <p><span><b>Name : {{comment.fullName}}</b><br></span> Mobile : {{comment.mobileNo}}</p>
+  <p><span>City: {{comment.city}}</b><br>
+  <p>{{comment.message}}</p>
+  {% endfor %}
+{% endif %}
+</div>
+{% endblock %}
